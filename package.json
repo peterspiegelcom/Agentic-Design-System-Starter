@@ -1,0 +1,15 @@
+{
+  "name": "agentic-design-system-starter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Behavioral Requirements (Contract Stories) + lauffähige Build-&-Verifikations-Pipeline.",
+  "scripts": {
+    "test": "playwright test",
+    "test:contracts": "python3 scripts/validate_contracts.py"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.9.1",
+    "@playwright/test": "^1.55.0",
+    "http-server": "^14.1.1"
+  }
+}

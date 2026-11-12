@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profil – Ergebnis</title>
+  <style>
+    body{font-family:system-ui,Arial,sans-serif;color:#1a1a1a;background:#fff;max-width:40rem;margin:2rem auto;padding:0 1rem;line-height:1.5}
+    .item{border:1px solid #ccced2;border-radius:10px;padding:1rem;margin:1rem 0}
+    button{font:inherit;cursor:pointer;border-radius:8px;padding:.5rem .9rem}
+    .why{background:#0b6b57;color:#fff;border:0}
+    .dissent{background:#fff;color:#0b3a4a;border:1.5px solid #0b3a4a;margin-top:.5rem}
+    .herleitung{margin-top:.75rem;padding:.75rem;background:#eef5f2;border-left:3px solid #0b6b57;border-radius:0 8px 8px 0}
+    [hidden]{display:none}
+  </style>
+</head>
+<body>
+  <h1>Dein Profil</h1>
+  <div class="item">
+    <h2>Teamfähigkeit</h2>
+    <button class="why" aria-expanded="false" aria-controls="herleitung-1">Warum?</button>
+    <div class="herleitung" id="herleitung-1" data-testid="herleitung" hidden>
+      <p>Das steht hier, weil du drei Aufgaben zusammen mit anderen gelöst hast.</p>
+      <button class="dissent">Widersprechen</button>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll('.why').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var region = document.getElementById(b.getAttribute('aria-controls'));
+        var open = b.getAttribute('aria-expanded') === 'true';
+        b.setAttribute('aria-expanded', String(!open));
+        region.hidden = open;
+      });
+    });
+  </script>
+</body>
+</html>
