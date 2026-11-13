@@ -29,6 +29,10 @@ Register (Recommendation) → Story (`contracts/stories`) → Build-Agent liest 
 User Story (`story`) · UX Contract (`verhalten`, `zustaende`, `nicht_funktional`) ·
 ausführbares Testprotokoll (`akzeptanz`) · Traceability (`evidenz`, `dimension`).
 
+## Evidenz ist ein Verweis, kein Abzug
+
+`evidenz` zeigt auf eine Recommendation (ID), nicht auf deren Inhalt. Das Register füllt sich nach und nach — Facts, Konfidenz und Validierung wachsen darunter weiter, ohne dass die Story angefasst wird. Referenziere die Recommendation als stabilen Anker (viele-zu-viele erlaubt); alles Wachsende bleibt im Register und wird live gelesen.
+
 ## Disziplin
 
 `verhalten` bleibt kurz, `akzeptanz` trägt den testbaren Biss. Romane in `verhalten`
