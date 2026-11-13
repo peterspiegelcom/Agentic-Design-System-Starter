@@ -67,3 +67,35 @@ scripts/     Contract-Validator
 
 Die CI (`.github/workflows/ci.yml`) läuft zweigleisig: **Verträge validieren**
 (Schema) und **Verhalten & Barrierefreiheit prüfen** (Playwright + axe).
+
+
+## Eine neue Contract Story schreiben
+
+Stories leben als .yaml unter contracts/stories/. Du schreibst sie nicht von
+Hand aus — du beschreibst sie, die KI formt sie gegen das Schema, du gibst
+fachlich frei.
+Beschreiben — in normalen Worten: wer, was, wozu; gewünschtes Verhalten;
+woran man Erfolg erkennt; welche Recommendation aus dem Register sie umsetzt.
+Formen lassen — Claude Code schreibt daraus eine valide .yaml nach
+contracts/schema/behavioral-requirement.schema.json.
+Fachlich prüfen — verhalten kurz halten, akzeptanz auf den testbaren
+Biss abklopfen.
+Committen — die CI validiert die Struktur und führt die Akzeptanz aus.
+Prompt-Vorlage für Claude Code
+Schreib eine neue Contract Story als
+contracts/stories/STORY-<nr>-<slug>.yaml,
+valide gegen contracts/schema/behavioral-requirement.schema.json.
+
+Zweck: Als <Rolle> will ich <Ziel>, damit <Nutzen>.
+Verhalten (kurz, EARS „Wenn …, soll das System …"): <…>
+Zustände: <…>
+Barrierefreiheit / NFA: <…>
+Akzeptanz (Given / When / Then): <…>
+Evidenz (Recommendation-ID aus dem Register): R-<nr>
+Dimension (ISO 9241-110): <…>
+
+Halte `verhalten` kurz; der testbare Biss gehört in `akzeptanz`.
+Leite anschließend features/<slug>.feature aus der Akzeptanz ab.
+​
+Die Recommendation-ID verbindet die Story zurück ins Evidenzregister — der Anker
+bleibt stabil, während die Evidenz darunter weiter wächst.
