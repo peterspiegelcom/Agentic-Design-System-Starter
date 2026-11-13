@@ -1,6 +1,6 @@
 # Agentic Design System — Starter
 
-[![CI](https://github.com/<USER>/agentic-design-system-starter/actions/workflows/ci.yml/badge.svg)](https://github.com/<USER>/agentic-design-system-starter/actions/workflows/ci.yml)
+[![CI](https://github.com/peterspiegelcom/Agentic-Design-System-Starter/actions/workflows/ci.yml/badge.svg)](https://github.com/peterspiegelcom/Agentic-Design-System-Starter/actions/workflows/ci.yml)
 
 > Behavioral Requirements (Contract Stories) mit lauffähiger Build-&-Verifikations-Pipeline — die Methode aus [*Agentic Design Systems*](https://peter-spiegel.medium.com/86829290139e) zum Anklicken. Von Peter Spiegel · peter-spiegel.com
 
