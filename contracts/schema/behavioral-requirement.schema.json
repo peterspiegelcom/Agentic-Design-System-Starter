@@ -3,26 +3,37 @@
   "$id": "https://peter-spiegel.com/schema/behavioral-requirement.json",
   "title": "Behavioral Requirement (Contract Story)",
   "type": "object",
-  "required": ["id", "story", "verhalten", "akzeptanz"],
+  "required": ["id", "story", "baseline", "nutzergruppe", "verhalten", "akzeptanz"],
   "additionalProperties": false,
   "properties": {
     "id": { "type": "string", "pattern": "^STORY-[0-9]{3,}$" },
     "story": { "type": "string", "description": "Als <Rolle> will ich <Ziel>, damit <Nutzen>." },
-    "evidenz": { "type": "array", "items": { "type": "string" }, "description": "IDs aus dem Evidenzregister, z. B. I-3, R-4" },
+    "evidenz": { "type": "array", "items": { "type": "string" }, "description": "Verweise ins Evidenzregister (Recommendation-/Insight-IDs), z. B. I-3, R-4. Verweis, keine Kopie." },
     "dimension": {
       "type": "string",
       "enum": ["Aufgabenangemessenheit","Selbstbeschreibung","Erwartungskonformitaet","Steuerbarkeit","Fehlertoleranz","Lernfoerderlichkeit","Individualisierbarkeit","Zugaenglichkeit","Joy of Use"],
-      "description": "Qualitaetsdimension nach ISO 9241-110 (+ Zugaenglichkeit, Joy of Use)"
+      "description": "Qualitaetsdimension nach ISO 9241-110 (+ Zugaenglichkeit, Joy of Use). Vokabular aus quality-and-context.yaml."
     },
-    "verhalten": { "type": "array", "items": { "type": "string" }, "minItems": 1, "description": "Das Wie, in EARS-Form: 'Wenn ..., soll das System ...'" },
+    "baseline": {
+      "type": "string",
+      "const": "quality-and-context",
+      "description": "Erbt die globale Baseline: universeller Qualitaets-Floor (WCAG AA, DSGVO, Performance) + Nutzungskontext."
+    },
+    "nutzergruppe": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["primaer","sekundaer"] },
+      "minItems": 1,
+      "description": "Erbt zusaetzlich die Anforderungen dieser Nutzergruppe(n) aus quality-and-context.yaml."
+    },
+    "verhalten": { "type": "array", "items": { "type": "string" }, "minItems": 1, "description": "Das Wie, in EARS-Form: 'Wenn ..., soll das System ...'. Kurz halten." },
     "zustaende": { "type": "array", "items": { "type": "string" } },
     "nicht_funktional": {
       "type": "object",
       "additionalProperties": { "type": "string" },
-      "description": "a11y, datenschutz, performance ..."
+      "description": "Nur fuer echte ABWEICHUNGEN vom Floor. Im Normalfall leer — Qualitaet & Kontext kommen aus baseline."
     },
-    "akzeptanz": { "type": "array", "items": { "type": "string" }, "minItems": 1, "description": "BDD/Gherkin — Given/When/Then/And" },
-    "ui": { "type": "array", "items": { "type": "string" }, "description": "Bezug zum UI Contract: Komponenten und Tokens" },
+    "akzeptanz": { "type": "array", "items": { "type": "string" }, "minItems": 1, "description": "BDD/Gherkin — Given/When/Then/And. Hier sitzt der testbare Biss." },
+    "ui": { "type": "array", "items": { "type": "string" }, "description": "Bezug zum UI Contract: Komponenten und Tokens." },
     "status": { "type": "string", "enum": ["draft","review","approved","deprecated"] },
     "sicherheit": { "type": "string", "enum": ["niedrig","mittel","hoch"] }
   }
