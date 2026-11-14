@@ -1,0 +1,122 @@
+## contracts/quality-and-context.yaml
+##
+## Globale Baseline für NUTZUNGSKONTEXT und UX-QUALITÄT.
+## Einmal definiert — von JEDER Contract Story geerbt.
+##
+## Eine Story deklariert ihre Nutzergruppe(n) und erbt daraus: die universellen
+## Vorgaben PLUS die Anforderungen genau dieser Gruppe(n). In der Story steht nur,
+## was davon ABWEICHT. Ändert sich ein Standard, ändert sich diese eine Datei —
+## nicht jede Story.
+##
+## Grundlage: ISO 9241-11 (Nutzungskontext), ISO 9241-110:2020 (Dialogprinzipien
+## als Qualitätsvokabular), WCAG 2.1 AA / EN 301 549 (Barrierefreiheits-Floor).
+##
+## Legende:  « … »  = projektspezifisch, hier für den Beispielkontext gefüllt.
+
+meta:
+  version: "1.0"
+  stand: "2026-11-14"
+  verantwortlich: "« Produkt-/UX-Lead »"
+  gilt_fuer: "« Produktname / Domäne »"
+  quelle: "Nutzungskontextanalyse « Datum / Studien-IDs aus dem Evidenzregister »"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 1 · NUTZUNGSKONTEXT — ISO 9241-11
+#     Wer nutzt das Produkt, wofür, und unter welchen Bedingungen.
+# ─────────────────────────────────────────────────────────────────────────────
+nutzungskontext:
+
+  ziel: >
+    « Was Nutzer mit dem Produkt erreichen wollen — in einem Satz, aus Nutzersicht,
+    nicht aus Systemsicht. Beispiel: Ein personenbezogenes Ergebnis verstehen und
+    einordnen können, um ihm zu vertrauen oder es zu hinterfragen. »
+
+  aufgaben:                  # die zentralen Nutzeraufgaben, nicht alle Features
+    - "« Ergebnis aufrufen und lesen »"
+    - "« nachvollziehen, warum das Ergebnis so zustande kommt »"
+    - "« das Ergebnis anzweifeln / Korrektur anstoßen »"
+
+  umgebung:                  # ISO 9241-11 — technisch, physisch, sozial
+    technisch: "« Web-App; getrennte Backend-Scoring-Logik; Netz teils instabil »"
+    physisch:  "« unterwegs, kleine Displays, wechselnde Lichtverhältnisse, laut »"
+    sozial:    "« allein, teils unter Zeitdruck; das Ergebnis ist emotional besetzt »"
+
+  geraete: "« Smartphone zuerst, ab 375 px Breite; Desktop sekundär »"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 2 · NUTZERGRUPPEN
+#     Jede Gruppe mit Rolle, Merkmalen und Bedarfen. Die Story referenziert eine
+#     Gruppe per id (siehe unten) und erbt deren Qualitätsanforderungen aus §3.
+# ─────────────────────────────────────────────────────────────────────────────
+nutzergruppen:
+
+  - id: primaer
+    rolle: "primär — nutzt das Produkt direkt für die Kernaufgabe"
+    beschreibung: "« z. B. Jugendliche 14–18 »"
+    merkmale:  "« teils Leseschwäche; Smartphone-first; wenig Vorerfahrung »"
+    bedarfe:   "« einfache Sprache, Vorlesefunktion, große Trefferflächen, klare Herleitung »"
+
+  - id: sekundaer
+    rolle: "sekundär — nutzt das Produkt unterstützend / fachlich"
+    beschreibung: "« z. B. Fachkräfte / Betreuende »"
+    merkmale:  "« geübt; Desktop; unter Zeitdruck; mehrere Fälle parallel »"
+    bedarfe:   "« Effizienz, Übersicht, Tastatur-Workflows, Exporte »"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 3 · UX-QUALITÄT
+#     (a) universell = Floor, gilt für ALLE Gruppen (oft gesetzlich).
+#     (b) dialogprinzipien = kontrolliertes Vokabular für das Feld `dimension`
+#         einer Story (ISO 9241-110:2020). Keine Qualitätsstufe, sondern die
+#         erlaubten Begriffe, damit das Register maschinenlesbar bleibt.
+#     (c) je_nutzergruppe = an die Gruppe gebunden, die den Inhalt tatsächlich nutzt.
+# ─────────────────────────────────────────────────────────────────────────────
+qualitaet:
+
+  universell:                # Floor — für ALLE Gruppen, nicht verhandelbar
+    barrierefreiheit: "WCAG 2.1 AA (EN 301 549) — Behinderung verteilt sich über alle Gruppen"
+    datenschutz:      "DSGVO — Datenminimierung, Einwilligung dokumentiert, keine PII im Log"
+    sicherheit:       "« Authentifizierung, Transportverschlüsselung, Rollen/Rechte »"
+    performance:      "« LCP < 2,5 s auf 3G; sichtbare Reaktion < 100 ms »"
+    browsersupport:   "« letzte 2 Versionen Chrome, Safari, Firefox, Edge »"
+
+  dialogprinzipien:          # ISO 9241-110 — erlaubte Werte für `dimension` einer Story.
+                             # EXAKT diese Begriffe stehen im Schema-enum (deutsch).
+    - Aufgabenangemessenheit       # suitability for the user's tasks
+    - Selbstbeschreibung           # self-descriptiveness
+    - Erwartungskonformitaet       # conformity with user expectations
+    - Steuerbarkeit                # controllability
+    - Fehlertoleranz               # use error robustness
+    - Lernfoerderlichkeit          # learnability
+    - Individualisierbarkeit       # individualisation
+    - Zugaenglichkeit              # accessibility (WCAG 2.1) — eigene prüfbare Dimension
+    - Joy of Use                   # user engagement / Nutzerbindung
+
+  je_nutzergruppe:           # erbt nur die Gruppe, die den Inhalt nutzt
+    primaer:
+      sprache:            "einfache Sprache; Begriffsliste; Vorlesefunktion"
+      lesbarkeit:         "Leseniveau ~A2; skalierbare Schrift; optional Mehrsprachigkeit"
+      barrierefreiheit_plus: "« optional: ausgewählte Flüsse WCAG 2.1 AAA »"
+    sekundaer:
+      effizienz:          "Tastatur-Workflows, Dichteansicht, Shortcuts, Exporte"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SO REFERENZIERT EINE CONTRACT STORY DIESE DATEI
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#   baseline: quality-and-context     # erbt §3.universell
+#   nutzergruppe: [primaer]           # erbt zusätzlich §3.je_nutzergruppe.primaer
+#   dimension: Selbstbeschreibung     # ein Wert aus §3.dialogprinzipien
+#
+# VERIFIKATION
+#   - universelle Checks (axe/WCAG, Performance) laufen gegen den GESAMTEN Build.
+#   - gruppenspezifische Anforderungen (Sprache, Vorlesen) prüft die Story-Akzeptanz
+#     dort, wo die betroffene Gruppe den Inhalt nutzt.
+#
+# WICHTIG
+#   Der Barrierefreiheits-Floor (WCAG 2.1 AA) gilt für ALLE Gruppen — Behinderung
+#   verteilt sich über jede Gruppe. Gruppenspezifisch ist nur, was den INHALT
+#   betrifft: Sprache, Leseniveau, Vorlesen. Nicht die Zugänglichkeit an sich.
