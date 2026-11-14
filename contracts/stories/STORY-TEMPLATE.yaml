@@ -1,0 +1,57 @@
+## contracts/stories/STORY-«nr»-«slug».yaml
+##
+## BLANKO CONTRACT STORY — ein Artefakt, das User Story, UX Contract,
+## ausführbaren Test und Rückverfolgbarkeit ins Evidenzregister in sich trägt.
+##
+## Du schreibst sie nicht von Hand aus — du beschreibst sie, die KI formt sie
+## gegen contracts/schema/behavioral-requirement.schema.json, du gibst fachlich frei.
+##
+## Grundsatz: `verhalten` kurz halten, den testbaren Biss trägt `akzeptanz`.
+## Romane im Verhalten → und das seitenlange Pflichtenheft ist zurück.
+##
+## Legende:  « … »  = pro Story ausfüllen.
+
+id: "STORY-«nr»"                 # stabile ID, z. B. STORY-042 — Anker, ändert sich nie
+
+story: >                         # klassische User Story: wer / was / wozu
+  Als «Rolle» will ich «Ziel»,
+  damit «Nutzen».
+
+evidenz: ["«R-nr»"]            # Atomic Research — Herkunft: Recommendation-ID(s)
+                               # aus dem Evidenzregister. VERWEIS, keine Kopie.
+                               # mehrere erlaubt: [I-3, R-4]
+
+dimension: "«Selbstbeschreibung»"   # EIN Wert aus quality-and-context.yaml › dialogprinzipien
+
+baseline: quality-and-context   # erbt den universellen Floor (WCAG AA, DSGVO, Performance …)
+nutzergruppe: ["«primaer»"]    # erbt zusätzlich die Anforderungen dieser Gruppe(n)
+
+verhalten:                      # das WIE, in EARS-Form — knapp, maschinen-parsebar
+  - "Wenn «Auslöser», soll das System «Verhalten»."
+
+zustaende: ["«leer»", "«laedt»", "«fehler»", "«…»"]   # alle relevanten Zustände benennen
+
+akzeptanz:                      # BDD — hier sitzt der prüfbare Biss, hieraus wird getestet
+  - |
+    Given «Ausgangslage»
+    When «Aktion»
+    Then «erwartetes Ergebnis»
+
+ui: ["«Component»", "«token/…»"]   # Verweis in den UI Contract (Figma / Code Connect)
+                                   # z. B. [Disclosure, Button/ghost, color/brand/primary]
+
+status: draft                   # draft | review | approved | deprecated
+sicherheit: "«mittel»"         # niedrig | mittel | hoch
+
+## nicht_funktional: {}         # NUR für echte ABWEICHUNGEN vom Floor. Im Normalfall
+                                # leer lassen — Qualität & Kontext kommen aus baseline.
+
+## ── NICHT in die Story ────────────────────────────────────────────────────────
+## Qualitätsattribute und Nutzungskontext (Barrierefreiheits-Standard, Performance-
+## Budget, DSGVO, Nutzergruppen, Umgebung) stehen NICHT hier. Sie leben einmal
+## global in quality-and-context.yaml. Die Story trägt nur, was davon ABWEICHT,
+## und erbt den Rest über `baseline` + `nutzergruppe`.
+##
+## ── Nach dem Schreiben ────────────────────────────────────────────────────────
+## Aus `akzeptanz` leitet sich features/«slug».feature ab — dieselbe Sprache,
+## die später getestet wird. Das Schema validiert die Struktur.

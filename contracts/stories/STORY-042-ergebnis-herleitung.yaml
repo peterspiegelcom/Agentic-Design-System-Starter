@@ -4,15 +4,14 @@ story: >
   entsteht, damit ich ihm glauben oder widersprechen kann.
 evidenz: [I-3, R-4]
 dimension: Selbstbeschreibung
+baseline: quality-and-context   # erbt WCAG 2.1 AA, DSGVO, Performance (global)
+nutzergruppe: [primaer]         # erbt zusätzlich: einfache Sprache, Vorlesen, große Trefferflächen
 verhalten:
   - Wenn ein Ergebnis angezeigt wird, soll das System eine aufklappbare
     Herleitung bieten ("… steht hier, weil").
   - Wenn ein:e Nutzer:in widerspricht, soll das System den Widerspruch
     erfassen und am Ergebnis markieren.
 zustaende: [leer, laedt, fehler, herleitung-zu, herleitung-auf]
-nicht_funktional:
-  a11y: WCAG 2.1 AA — Herleitung per Tastatur erreichbar, Fokusreihenfolge definiert
-  datenschutz: Widerspruch ohne personenbezogene Daten speicherbar
 akzeptanz:
   - |
     Given ich bin auf der Profilseite

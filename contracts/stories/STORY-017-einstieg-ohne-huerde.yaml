@@ -4,14 +4,14 @@ story: >
   Teilnahme nicht an Login, Lesen oder Sprache scheitert.
 evidenz: [I-1, R-1, R-2]
 dimension: Zugaenglichkeit
+baseline: quality-and-context   # erbt WCAG 2.1 AA, DSGVO, Performance (global)
+nutzergruppe: [primaer]         # erbt zusätzlich: Vorlesen, skalierbare Schrift, einfache Sprache
 verhalten:
   - Wenn der Einstieg beginnt, soll das System Zugang per Code oder QR
     ermöglichen (kein Passwort).
   - Wenn Text angezeigt wird, soll das System eine Vorlesefunktion und
     skalierbare Schrift anbieten.
 zustaende: [einstieg, code-eingabe, vorlesen-aktiv, fehler]
-nicht_funktional:
-  a11y: WCAG 2.1 AA — bedienbar ohne Lesen; Trefferflächen >= 44px
 akzeptanz:
   - |
     Given ich öffne die Anwendung mit einem Code
